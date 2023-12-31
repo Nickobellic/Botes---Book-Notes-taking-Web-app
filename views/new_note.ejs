@@ -1,0 +1,42 @@
+<%- include("partials/header.ejs") %>
+
+<div class="add-note">
+    <form class="create-form" action="<%= locals.method ? method : "/create" %>" method="post">
+        <div class="mb-4">
+            <h1><%= locals.buttonName ? buttonName : "Create" %> Book Note</h1>
+        </div>
+        <div class="mb-4">
+            <label for="exampleInputEmail1" class="form-label">ISBN Number of the Book</label>
+            <input placeholder="ISBN Number" value="<%= locals.isbn && isbn %>" type="number" name="isbn" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>
+        </div>
+        <div class="mb-4">
+          <label for="exampleInputEmail1" class="form-label">Title of the Book</label>
+          <input placeholder="Title" type="text" value="<%= locals.title ? title : "" %>" name="title" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>
+          <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+        </div>
+        <div class="mb-4">
+          <label for="exampleInputPassword1" class="form-label">Description of the Book</label>
+          <textarea  placeholder="Short Introduction about the Book" type="text" name="description" class="form-control" id="exampleInputPassword1" rows="6" required> "<%= locals.description ? description : "" %>" </textarea>
+        </div>
+        <div class="mb-4">
+          <label for="exampleInputPassword1" class="form-label">Mention your Notes</label>
+          <textarea  placeholder="Book Notes" type="text" name="notes" class="form-control" id="exampleInputPassword1" rows="20" required>"<%= locals.notes ? notes : "" %>"</textarea>
+        </div>
+        <!-- <div class="mb-4">
+            <label for="exampleInputEmail1" class="form-label">Name of the Author</label>
+            <input placeholder="Author" type="text" name="author" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        </div> -->
+        <!-- <div class="mb-4">
+            <label for="exampleInputEmail1" class="form-label">ID of the Author</label>
+            <input placeholder="Author ID" type="number" name="auth_id" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        </div> -->
+        <div class="mb-4 form-check">
+          <input type="checkbox" class="form-check-input" id="exampleCheck1">
+          <!-- <label class="form-check-label" for="exampleCheck1">Check me out</label> -->
+        </div>
+        <button type="submit" class="btn btn-primary">               
+            <%= locals.buttonName ? buttonName : "Create" %></button>
+      </form>
+</div>
+
+<%- include("partials/footer.ejs") %>

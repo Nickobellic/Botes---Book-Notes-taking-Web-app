@@ -1,0 +1,60 @@
+<%- include("partials/header.ejs") %>
+
+<div class="view-note">
+    <div class="view-book">
+        <div class="flip-card" style="margin-top: 20px; margin-bottom: 20px; height: 50vh;">
+            <div class="flip-card-inner">
+              <div class="flip-card-back">
+                <img class="book-cov flip-card-front" src="<%= book.author_img %>">
+            </div>
+              <div class="flip-card-front">
+                <img class="book-cov flip-card-front" src="<%= book.cover_img %>">
+              </div>
+            </div>
+        </div>
+        <div class="view-title"><%= book.title %></div>
+        <div class="view-date">Read on: <%= new Date(book.read_date).toLocaleDateString({year: "numeric", month: "long", day: "numeric"}) %></div>
+        <div class="view-desc">
+            <div class="book-sub-title">Description</div>
+            <%
+            // Assuming 'text' is the variable containing your text
+            var sentences = book.description.split(/\.\s+/); // Split the text into an array of sentences
+            var sentencesPerLine = 4;
+          
+            for (var i = 0; i < sentences.length; i += sentencesPerLine) {
+              var chunk = sentences.slice(i, i + sentencesPerLine).join(". ");
+              %>
+              &#160 &#160 &#160 &#160 &#160 &#160 &#160 &#160 
+
+              <%= chunk %>.<br><br>
+              <%
+            }
+          %>
+          
+</div>
+        <div class="view-desc">
+            <div class="book-sub-title">Book Notes</div>
+
+            <%
+  // Assuming 'text' is the variable containing your text
+  var sentences = book.notes.split(/\.\s+/); // Split the text into an array of sentences
+  var sentencesPerLine = 4;
+
+  for (var i = 0; i < sentences.length; i += sentencesPerLine) {
+    var chunk = sentences.slice(i, i + sentencesPerLine).join(". ");
+    %>
+    &#160 &#160 &#160 &#160 &#160 &#160 &#160 &#160
+    <%= chunk %>.<br><br>
+    <%
+  }
+%>
+
+
+</div>
+
+
+    </div>
+
+</div>
+
+<%- include("partials/footer.ejs") %>
