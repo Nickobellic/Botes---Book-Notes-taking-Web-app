@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Bluetooth Example</title>
+</head>
+<body>
+    <h1>Web Bluetooth Example</h1>
+
+    <button onclick="connectToDevice()">Connect to BLE Device</button>
+
+    <script>
+        async function connectToDevice() {
+            try {
+                // Request Bluetooth device
+                const device = await navigator.bluetooth.requestDevice({
+                    filters: [{ services: ['location_service'] }]
+                });
+
+                // Connect to the device
+                const server = await device.gatt.connect();
+
+                // Get the Location Service
+                const service = await server.getPrimaryService('location_service');
+
+                // Get the Latitude characteristic
+                const latitudeCharacteristic = await service.getCharacteristic('latitude');
+
+                // Get the Longitude characteristic
+                const longitudeCharacteristic = await service.getCharacteristic('longitude');
+
+                // Read the Latitude value
+                const latitudeValue = await latitudeCharacteristic.readValue();
+
+                // Read the Longitude value
+                const longitudeValue = await longitudeCharacteristic.readValue();
+
+                console.log('Latitude:', latitudeValue.getFloat32(0, true));
+                console.log('Longitude:', longitudeValue.getFloat32(0, true));
+
+                // Disconnect from the device
+                await device.gatt.disconnect();
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+    </script>
+</body>
+</html>
